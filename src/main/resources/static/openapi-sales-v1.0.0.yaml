@@ -1,0 +1,142 @@
+openapi: 3.0.4
+info:
+  title: Sales service - OpenAPI 3.0.4
+  description: |-
+    This is a Sales service based on OpenAPI 3.0.4 specification.
+  contact:
+    email: michael.porracchia@gmail.com
+  version: 1.0.0
+tags:
+  - name: Sales
+    description: Generating shopping basket receipt
+paths:
+  /sales:
+    post:
+      tags:
+        - Sales
+      summary: Returns a receipt for products sold
+      description: |-
+        This service need a shopping basket to calculate the final price of each product it contains
+        based on applicable taxes, and estimate the total cost of the shopping basket.
+      operationId: generateReceipt
+      requestBody:
+        description: The shopping basket
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingBasket'
+      responses:
+        '202':
+          description: Receipt returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '412':
+          description: Precondition Failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        code:
+          type: string
+    ShoppingBasket:
+      required:
+        - id
+        - goods
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique and technical shopping basket identifier
+          example: 16
+        goods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Good'
+    Good:
+      required:
+        - name
+        - quantity
+        - category
+        - imported
+        - price
+      type: object
+      properties:
+        name:
+          type: string
+          example: chocolate
+        quantity:
+          type: integer
+          format: int32
+          example: 8
+        category:
+          type: string
+          description: The kind of article
+          example: food
+          enum:
+            - book
+            - food
+            - medical product
+            - other
+        imported:
+          type: boolean
+          description: indicates if it is an imported product or not
+          default: false
+        price:
+          type: number
+          format: double
+          minimum: 0
+          multipleOf: 0.01
+          description: Price with a maximum of two decimal places
+          example: 9.75
+    Receipt:
+      required:
+        - id
+        - ShoppingBasket
+        - Sales Taxes
+        - Total
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique and technical receipt identifier
+          example: 1616
+        ShoppingBasket:
+          $ref: '#/components/schemas/ShoppingBasket'
+        Sales Taxes:
+          type: number
+          format: double
+          minimum: 0
+          multipleOf: 0.01
+          description: Taxes amount with a maximum of two decimal places
+          example: 6.70
+        Total:
+          type: number
+          format: double
+          minimum: 0
+          multipleOf: 0.01
+          description: Total amount of the purchase with a maximum of two decimal places
+          example: 74.68
