@@ -1,0 +1,36 @@
+# Context path
+server:
+  servlet:
+    context-path: '/sales-api'
+
+spring:
+  application:
+    name: sales-api
+
+# Logging config
+logging:
+  file:
+    path: C:/logs/bref-api
+  level:
+    root: INFO
+    fr.itsf: DEBUG
+
+# Actuator config
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+# Springdoc OpenAPI / Swagger-UI config
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
