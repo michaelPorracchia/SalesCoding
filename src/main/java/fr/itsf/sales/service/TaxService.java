@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Tax calculation service
+ * <p>
+ * Apply taxe according to the good category and the good imported status
+ * and round the taxe to 5 cents
+ */
 @Service
 public class TaxService {
 
@@ -37,11 +43,21 @@ public class TaxService {
         return good.getUnitBasePrice().multiply(this.calculateTaxRateValue(good));
     }
 
+    /**
+     * Calculate the total tax for a good
+     * @param good the good to calculate the tax for
+     * @return BigDecimal
+     */
     public BigDecimal calculateGoodTotalTax(Good good) {
         BigDecimal qty = BigDecimal.valueOf(good.getQuantity());
         return qty.multiply(roundTax(this.calculateUnitTaxAmount(good)));
     }
 
+    /**
+     * Calculate the total tax amount and the included tax price for a good
+     * @param good the good to calculate the tax and price for
+     * @return TotalTaxAndPrice
+     */
     public TotalTaxAndPrice calculateIncludedTaxPriceGood(Good good) {
         BigDecimal qty = BigDecimal.valueOf(good.getQuantity());
         TotalTaxAndPrice totalTaxAndPrice = new TotalTaxAndPrice(BigDecimal.ZERO, BigDecimal.ZERO);

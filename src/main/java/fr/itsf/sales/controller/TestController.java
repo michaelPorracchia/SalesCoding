@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for testing specific Exceptions unraisable in test environment
+ */
 @RestController
 @RequestMapping("/test")
 @Profile("test")

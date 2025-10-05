@@ -4,6 +4,9 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
+/**
+ * Tax rate enum for goods
+ */
 @Getter
 public enum TaxRate {
     STANDARD(new BigDecimal("0.10")),

@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller for receipt generation based on the shopping basket
+ * <p>
+ * @see SalesSpec
+ */
 @RestController
 @RequiredArgsConstructor
 public class ReceiptController implements SalesSpec {

@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+/**
+ * Service for receipt generation
+ * <p>
+ * Processing the shopping basket by applying applyable tax for each row and generate the receipt containing
+ * the total taxes, the total price and the Good list with all included taxes price
+ */
 @Service
 @RequiredArgsConstructor
 public class ReceiptService {
@@ -23,6 +29,11 @@ public class ReceiptService {
     private final GoodFactory goodFactory;
     private final UtilMapper utilMapper;
 
+    /**
+     * Generate a receipt from a shopping basket
+     * @param shoppingBasketSpec the shopping basket specification
+     * @return ReceiptSpec
+     */
     public ReceiptSpec generateReceipt(ShoppingBasketSpec shoppingBasketSpec) {
         Receipt receipt = new Receipt(shoppingBasketMapper.asShoppingBasket(shoppingBasketSpec, goodFactory, utilMapper));
         TotalTaxAndPrice sumTotalTaxAndPrice = new TotalTaxAndPrice(BigDecimal.ZERO, BigDecimal.ZERO);
