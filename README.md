@@ -57,7 +57,97 @@ L’API peut être :
    ```
 2. **Ou exécutée** directement depuis IntelliJ.
 
-Une **collection Postman (format 2.1)** est fournie dans les fichiers sources du projet, permettant de **tester facilement l’API** et de reproduire les cas d’usage de l’énoncé.
+Une **collection Postman (format 2.1)** nommée "Sales_API_test.postman_collection.json" est fournie dans les fichiers sources du projet, permettant de **tester facilement l’API** et de reproduire les cas d’usage de l’énoncé.
+Ci-dessous les json utilisés:
+
+Input 1
+```json
+{
+  "id": 1,
+  "goods": [
+    {
+      "name": "Book",
+      "quantity": 1,
+      "category": "book",
+      "imported": false,
+      "price": 12.49
+    },
+    {
+      "name": "Music CD",
+      "quantity": 1,
+      "category": "other",
+      "imported": false,
+      "price": 14.99
+    },
+    {
+      "name": "Chocolate bar",
+      "quantity": 1,
+      "category": "food",
+      "imported": false,
+      "price": 0.85
+    }
+  ]
+}
+```
+Input 2
+```json
+{
+  "id": 2,
+  "goods": [
+    {
+      "name": "box of chocolates",
+      "quantity": 1,
+      "category": "food",
+      "imported": true,
+      "price": 10.00
+    },
+    {
+      "name": "bottle of perfume",
+      "quantity": 1,
+      "category": "other",
+      "imported": true,
+      "price": 47.50
+    }
+  ]
+}
+```
+
+Input 3
+```json
+{
+  "id": 3,
+  "goods": [
+    {
+      "name": "bottle of perfume",
+      "quantity": 1,
+      "category": "other",
+      "imported": true,
+      "price": 27.99
+    },
+    {
+      "name": "bottle of perfume",
+      "quantity": 1,
+      "category": "other",
+      "imported": false,
+      "price": 18.99
+    },
+    {
+      "name": "Packet of headache pills",
+      "quantity": 1,
+      "category": "medical",
+      "imported": false,
+      "price": 9.75
+    },
+    {
+      "name": "box of chocolates",
+      "quantity": 1,
+      "category": "food",
+      "imported": true,
+      "price": 11.25
+    }
+  ]
+}
+```
 
 ---
 
@@ -65,8 +155,8 @@ Une **collection Postman (format 2.1)** est fournie dans les fichiers sources du
 
 | URL | Description |
 |------|--------------|
-| [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) | Documentation Swagger auto-générée |
-| [http://localhost:8080/actuator/health](http://localhost:8080/actuator/health) | État d’exécution de l’API |
+| [http://localhost:8080/swagger-ui.html](http://localhost:8080/sales-api/swagger-ui.html) | Documentation Swagger auto-générée |
+| [http://localhost:8080/actuator/health](http://localhost:8080/sales-api/actuator/health) | État d’exécution de l’API |
 | [http://localhost:8080/sales-api/sales](http://localhost:8080/sales-api/sales) | Endpoint principal (service de facturation) |
 
 ---
