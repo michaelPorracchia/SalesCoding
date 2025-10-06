@@ -155,8 +155,8 @@ Input 3
 
 | URL | Description |
 |------|--------------|
-| [http://localhost:8080/swagger-ui.html](http://localhost:8080/sales-api/swagger-ui.html) | Documentation Swagger auto-générée |
-| [http://localhost:8080/actuator/health](http://localhost:8080/sales-api/actuator/health) | État d’exécution de l’API |
+| [http://localhost:8080/sales-api/swagger-ui.html](http://localhost:8080/sales-api/swagger-ui.html) | Documentation Swagger auto-générée |
+| [http://localhost:8080/sales-api/actuator/health](http://localhost:8080/sales-api/actuator/health) | État d’exécution de l’API |
 | [http://localhost:8080/sales-api/sales](http://localhost:8080/sales-api/sales) | Endpoint principal (service de facturation) |
 
 ---
