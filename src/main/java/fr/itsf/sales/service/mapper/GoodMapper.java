@@ -1,4 +1,4 @@
-package fr.itsf.sales.controller.mapper;
+package fr.itsf.sales.service.mapper;
 
 import fr.itsf.model.GoodSpec;
 import fr.itsf.sales.model.factory.GoodFactory;
@@ -18,7 +18,7 @@ public interface GoodMapper {
     /**
      * Convert a Good to a GoodSpec
      * @param good the good to convert into a DTO
-     * @return
+     * @return GoodSpec
      */
     @Mapping(source = "price", target = "price", qualifiedByName = "bigDecimalToDouble")
     @Mapping(target = "category", expression = "java(getCategoryFromGood(good))")
@@ -27,11 +27,17 @@ public interface GoodMapper {
     /**
      * Get the category from a Good
      * @param good the good required to get his category
-     * @return
+     * @return GoodSpec.CategoryEnum the category of the good
      */
     default GoodSpec.CategoryEnum getCategoryFromGood(Good good) {
         String className = good.getClass().getSimpleName().toLowerCase(java.util.Locale.ROOT);
-        return GoodSpec.CategoryEnum.fromValue(className);
+        try {
+            return GoodSpec.CategoryEnum.fromValue(className);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(
+                    "Unknown category for good type: " + good.getClass().getSimpleName(), e
+            );
+        }
     }
 
     /**

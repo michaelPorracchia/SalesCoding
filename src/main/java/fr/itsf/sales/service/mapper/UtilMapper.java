@@ -1,4 +1,4 @@
-package fr.itsf.sales.controller.mapper;
+package fr.itsf.sales.service.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;

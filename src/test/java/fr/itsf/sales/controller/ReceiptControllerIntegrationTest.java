@@ -3,24 +3,25 @@ package fr.itsf.sales.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.itsf.model.GoodSpec;
 import fr.itsf.model.ShoppingBasketSpec;
+import fr.itsf.sales.service.ReceiptService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 class ReceiptControllerIntegrationTest {
 
     @Autowired
@@ -28,6 +29,9 @@ class ReceiptControllerIntegrationTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private ReceiptService receiptService;
 
     @Test
     void testGenerateReceipt_input1() throws Exception {
@@ -175,8 +179,16 @@ class ReceiptControllerIntegrationTest {
 
     @Test
     void testBadRequest_shouldReturn400() throws Exception {
-        mockMvc.perform(get("/test/bad-request")
-                        .contentType(MediaType.APPLICATION_JSON))
+        // Mock le service pour lever une IllegalArgumentException
+        when(receiptService.generateReceipt(any())).thenThrow(new IllegalArgumentException("Invalid argument"));
+
+        ShoppingBasketSpec basketSpec = new ShoppingBasketSpec();
+        basketSpec.setId(1L);
+        basketSpec.setGoods(List.of(createGoodSpec("test", 10.0, 1, GoodSpec.CategoryEnum.BOOK, false)));
+
+        mockMvc.perform(post("/sales")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(basketSpec)))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.code").value("400"))
@@ -211,8 +223,16 @@ class ReceiptControllerIntegrationTest {
 
     @Test
     void testInternalServerError_shouldReturn500() throws Exception {
-        mockMvc.perform(get("/sales/test-error")
-                        .contentType(MediaType.APPLICATION_JSON))
+        // Mock le service pour lever une RuntimeException (erreur 500)
+        when(receiptService.generateReceipt(any())).thenThrow(new RuntimeException("Unexpected error"));
+
+        ShoppingBasketSpec basketSpec = new ShoppingBasketSpec();
+        basketSpec.setId(1L);
+        basketSpec.setGoods(List.of(createGoodSpec("test", 10.0, 1, GoodSpec.CategoryEnum.BOOK, false)));
+
+        mockMvc.perform(post("/sales")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(basketSpec)))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.code").value("500"))

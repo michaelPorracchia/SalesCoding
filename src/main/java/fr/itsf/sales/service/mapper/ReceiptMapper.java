@@ -1,4 +1,4 @@
-package fr.itsf.sales.controller.mapper;
+package fr.itsf.sales.service.mapper;
 
 import fr.itsf.model.ReceiptSpec;
 import fr.itsf.sales.model.Receipt;

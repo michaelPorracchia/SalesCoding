@@ -2,12 +2,12 @@ package fr.itsf.sales.service;
 
 import fr.itsf.model.ReceiptSpec;
 import fr.itsf.model.ShoppingBasketSpec;
-import fr.itsf.sales.controller.mapper.ReceiptMapper;
-import fr.itsf.sales.controller.mapper.ShoppingBasketMapper;
-import fr.itsf.sales.controller.mapper.UtilMapper;
 import fr.itsf.sales.model.Receipt;
 import fr.itsf.sales.model.TotalTaxAndPrice;
 import fr.itsf.sales.model.factory.GoodFactory;
+import fr.itsf.sales.service.mapper.ReceiptMapper;
+import fr.itsf.sales.service.mapper.ShoppingBasketMapper;
+import fr.itsf.sales.service.mapper.UtilMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
