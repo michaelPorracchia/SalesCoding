@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "6378916f-7aa8-4fee-b589-28bd294526f2",
+		"name": "Sales API test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44539333",
+		"_collection_link": "https://galactic-trinity-9524963.postman.co/workspace/Micha%C3%ABl's-Workspace~c0bd832e-054b-4aa9-8c2f-454fe2d5623b/collection/44539333-6378916f-7aa8-4fee-b589-28bd294526f2?action=share&source=collection_link&creator=44539333"
+	},
+	"item": [
+		{
+			"name": "Input 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"goods\": [\n    {\n      \"name\": \"Book\",\n      \"quantity\": 1,\n      \"category\": \"book\",\n      \"imported\": false,\n      \"price\": 12.49\n    },\n    {\n      \"name\": \"Music CD\",\n      \"quantity\": 1,\n      \"category\": \"other\",\n      \"imported\": false,\n      \"price\": 14.99\n    },\n    {\n      \"name\": \"Chocolate bar\",\n      \"quantity\": 1,\n      \"category\": \"food\",\n      \"imported\": false,\n      \"price\": 0.85\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sales-api/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sales-api",
+						"sales"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Input 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 2,\n  \"goods\": [\n    {\n      \"name\": \"box of chocolates\",\n      \"quantity\": 1,\n      \"category\": \"food\",\n      \"imported\": true,\n      \"price\": 10.00\n    },\n    {\n      \"name\": \"bottle of perfume\",\n      \"quantity\": 1,\n      \"category\": \"other\",\n      \"imported\": true,\n      \"price\": 47.50\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sales-api/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sales-api",
+						"sales"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Input 3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 3,\n  \"goods\": [\n    {\n      \"name\": \"bottle of perfume\",\n      \"quantity\": 1,\n      \"category\": \"other\",\n      \"imported\": true,\n      \"price\": 27.99\n    },\n    {\n      \"name\": \"bottle of perfume\",\n      \"quantity\": 1,\n      \"category\": \"other\",\n      \"imported\": false,\n      \"price\": 18.99\n    },\n    {\n      \"name\": \"Packet of headache pills\",\n      \"quantity\": 1,\n      \"category\": \"medical\",\n      \"imported\": false,\n      \"price\": 9.75\n    },\n    {\n      \"name\": \"box of chocolates\",\n      \"quantity\": 1,\n      \"category\": \"food\",\n      \"imported\": true,\n      \"price\": 11.25\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sales-api/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sales-api",
+						"sales"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://template.postman-echo.com"
+		}
+	]
+}
